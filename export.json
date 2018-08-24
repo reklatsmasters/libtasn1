@@ -1,0 +1,7 @@
+[
+  "_asn1_check_version",
+  "_asn1_strerror",
+  "_malloc",
+  "_free",
+  "asn1_strerror"
+]

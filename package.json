@@ -1,0 +1,37 @@
+{
+  "name": "libtasn1",
+  "version": "0.0.0",
+  "description": "GNU Libtasn1 compiled to WebAssembly",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx eslint index.js example.js",
+    "build": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reklatsmasters/libtasn1.git"
+  },
+  "keywords": [
+    "gnu",
+    "asn1",
+    "libtasn1",
+    "wasm",
+    "webassembly",
+    "der",
+    "ber"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
+  "author": "Dmitriy Tsvettsikh <me@reklatsmasters.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reklatsmasters/libtasn1/issues"
+  },
+  "homepage": "https://github.com/reklatsmasters/libtasn1#readme",
+  "devDependencies": {
+    "@comocapital/eslint-config": "^1.3.0",
+    "eslint": "^4.19.1",
+    "prettier": "^1.14.2"
+  }
+}
