@@ -10,7 +10,7 @@ const _module = Symbol('module');
 
 const ASN1_MAX_TAG_SIZE = 4;
 const ASN1_MAX_LENGTH_SIZE = 9;
-const ASN1_MAX_TL_SIZE = ASN1_MAX_TAG_SIZE+ASN1_MAX_LENGTH_SIZE;
+const ASN1_MAX_TL_SIZE = ASN1_MAX_TAG_SIZE + ASN1_MAX_LENGTH_SIZE;
 const ASN1_SUCCESS = 0;
 
 /**
@@ -120,6 +120,7 @@ class Libtasn1 {
    * @param {number} etype The type of the string to be encoded (ASN1_ETYPE_)
    * @param {string} str the string data.
    * @param {string} [encoding] valid nodejs string encoding.
+   * @returns {[Buffer, number]} the encoded tag with length; ASN1_SUCCESS if successful or an error value.
    */
   encode_simple_der(etype, str, encoding = 'ascii') {
     assertint(etype);
@@ -129,9 +130,19 @@ class Libtasn1 {
 
     const out_tl = this.malloc(ASN1_MAX_TL_SIZE);
     const out_tl_size = this.malloc(ASN1_MAX_TAG_SIZE); // size of int, 4 in wasm32
-    const ret = this[_module]._asn1_encode_simple_der(etype, in_ptr, in_length, out_tl, out_tl_size);
+    const ret = this[_module]._asn1_encode_simple_der(
+      etype,
+      in_ptr,
+      in_length,
+      out_tl,
+      out_tl_size
+    );
 
-    const tl_size = Buffer.from(this.memory.buffer, out_tl_size, ASN1_MAX_TAG_SIZE).readUInt32BE(0);
+    const tl_size = Buffer.from(
+      this.memory.buffer,
+      out_tl_size,
+      ASN1_MAX_TAG_SIZE
+    ).readUInt32BE(0);
     const view_tl = Buffer.from(this.memory.buffer, out_tl, tl_size);
     const tl = Buffer.from(view_tl); // copy data wasm -> node
 
@@ -159,7 +170,7 @@ class Libtasn1 {
       throw new TypeError('Expected Buffer');
     }
 
-    const input_ptr = this.salloc(str);
+    const input_ptr = this.salloc(bitstr);
     const input_length = bitstr.length;
 
     const length = this[_module]._node_asn1_bit_der(
