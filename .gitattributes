@@ -1,3 +1,4 @@
 *.a           binary
+*.bc          binary
 *.wasm        binary
 libtasn1.js   binary

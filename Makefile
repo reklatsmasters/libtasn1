@@ -3,8 +3,15 @@ EMCC=emcc
 libdir=vendor/lib
 EXPORTED_FUNCTIONS=export.json
 DEPS=$(libdir)/libtasn1.a
+OBJECTS=wrapper.bc
 
-libtasn1.js: $(DEPS)
+%.bc: %.c
+	$(EMCC) \
+		$(CFLAGS) \
+		$(DEPS) \
+		$< -o $@
+
+libtasn1.js: $(DEPS) $(OBJECTS)
 	$(EMCC) \
 		$(CFLAGS) \
 		-s WASM=1 \
@@ -21,6 +28,7 @@ libtasn1.js: $(DEPS)
 		-s BINARYEN_METHOD='native-wasm' \
 		-s TOTAL_MEMORY=1310720 \
 		-s TOTAL_STACK=655360 \
+		$(OBJECTS) \
 		$(DEPS) \
 		-o $@
 

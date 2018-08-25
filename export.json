@@ -1,6 +1,26 @@
 [
   "_asn1_check_version",
   "_asn1_strerror",
+
+  "_node_asn1_length_der",
+  "_node_asn1_octet_der",
+  "_node_asn1_bit_der",
+
+  "_asn1_encode_simple_der",
+  "_asn1_der_coding",
+  "_asn1_get_length_der",
+  "_asn1_get_tag_der",
+  "_asn1_get_length_ber",
+  "_asn1_get_octet_der",
+  "_asn1_get_bit_der",
+  "_asn1_der_decoding2",
+  "_asn1_der_decoding",
+  "_asn1_der_decoding_element",
+  "_asn1_der_decoding_startEnd",
+  "_asn1_expand_any_defined_by",
+  "_asn1_expand_octet_string",
+  "_asn1_decode_simple_der",
+
   "_malloc",
   "_free",
   "asn1_strerror"
